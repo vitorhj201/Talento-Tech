@@ -1,0 +1,149 @@
+import ' package:flutter/material.dart';
+
+
+class TelaPlaneta extends StatefulWidgte {
+  
+    const TelaPlaneta ({super.key});
+    @Override
+    State<TelaPlaneta> createState( ) => _TelaPlanetaState();
+
+}
+
+class _TelaPlanetaState extends State<TelaPlaneta> {
+  final _formKey = GlobalKey<FormState>();
+
+    final TextEditingController _nameController = TextEditingController ();
+    final TextEditingController _tamanhoController = TextEditingController ();
+    final TextEditingController _distânciaController = TextEditingController ();
+    final TextEditingController _apelidoController = TextEditingController ();
+    final ControlePlaneta _controlePlaneta = ControlePlaneta();
+    final Planetqa _planeta = Planeta.vazio();
+
+    @Override
+    void dispose(){
+       _nameController.text = 'Terra';
+       _tamanhoController.text = '100';
+       _distânciaController.text = '1000'
+       _apelidoController.text = 'Terra Nova'
+       super.initState();
+    }
+
+    @Override
+    void dispose(){
+       _nameController.dispose();
+       _tamanhoController.dispose();
+       _distânciaController.dispose();
+       _apelidoController.dispose();
+       super.dispose()
+     
+     Futre<void> inserirPlaneta() async
+     await _controlePlaneta.InserirPlaneta(_planeta);
+
+    }
+  void _submitForm() {
+       if(_formKey.currentState!validate()) {
+         _formKey.currentState!.save();
+
+         _inserirPlaneta();
+      
+      ScaffoldMessenger.of(context).showSnackBar(
+      Const SnackBar(content: Text('Dados do Planeta foram salvos com sucesso!'),),)
+       
+      Navigator.of(context).pop();
+       }
+
+  }
+
+    @Override
+    Widget build(BuildContext context){
+      return Scaffold(
+       appBar: AppBar(
+        centertitle:
+         title: Text ('Cadastrar Planeta'),
+         elevation: 3,
+    ),
+    body: Padding(padding: const EdgeInsets.synnetric(horizontal: 40.0, vertical: 20.0), 
+    child: Form(
+        
+        key:_formKey,
+    child: SingleChildScrollView(child: Column(Childrem: [, 
+        TextFormField:(
+          controller: _nameController,
+          decoration: const InputDecoration(LabelText: 'Nome')),,
+          border: OutlineInputBorder(),
+          borderRadius: OutlineInputBorder(10.0),
+),    validator: (value) {
+        if (value == null || value.insEmpty || value.length < 3) } {
+          return 'Por favor, informe o nome do planeta( 3 ou mais caracteres)';},
+         onSaved: (value) {
+          _planeta.name = value!;
+
+         }, 
+        ), 
+        TextFormField:(
+          controller: _tamanhoController,
+          decoration: const InputDecoration(
+              LabelText: 'Tamanho (em km)'),),
+              KeyboardType: TextInputMode.number,
+        ), //InputDecoration
+             autovalidateMode: autovalidateMode.onUserInteraction,
+           validator: (value) {
+        if (value == null || value.insEmpty) {
+          return 'Por favor, informe o Tamanho do planeta';
+        }
+        if (double,tryParse(value) == null {
+           return 'Insira um valor numérico válido';
+        })
+        return null;
+           },
+          onSaved: (value) {
+          _planeta.tamanho = double.parse(value!);
+
+         }, 
+        TextFormField:(
+          controller: _distânciaController,
+          decoration: const InputDecoration(
+              LabelText: 'Distância (em km)'), 
+              KeyboardType: TextInputMode.number,
+        ),
+             autovalidateMode: autovalidateMode.onUserInteraction,
+           validator: (value) {
+        if (value == null || value.insEmpty) {
+          return 'Por favor, informe a distância do planeta';
+        }
+        if (double,tryParse(value) == null {
+           return 'Insira um valor numérico válido';
+        })
+        return null;
+        onSaved: (value) {
+          _planeta.distância = double.parse(value!);
+           },), 
+      TextFormField:(
+          controller: _apelidoController,
+          decoration: const InputDecoration(
+          LabelText: 'Apelido'),),
+          onSaved: (value) {
+          _planeta.apelido = value!;
+
+         }, 
+      SizedBox(height: 20.0,),
+      ElevatedButton(
+      onPressed: _submitForm() {Text(_nameController.text);
+      }, //_submitForm,
+      child: Text('Salvar')
+      )
+        ),
+      ), 
+  ,)
+    
+   
+    
+    ],
+    (
+    ),),
+    
+    
+    );
+  }
+
+}
